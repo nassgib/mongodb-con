@@ -11,7 +11,7 @@ connectToDatabase();
 
 app.use(bodyParser.json(), express.static(path.join(__dirname, "public")), gamesRouter, categoriesRouter, usersRouter);
 
-const PORT = 3005;
+const PORT = 3000;
 
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
