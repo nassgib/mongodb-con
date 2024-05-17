@@ -59,7 +59,19 @@ const checkEmptyFields = async (req, res, next) => {
     !req.body.developer
   ) {
     res.setHeader("Content-Type", "application/json");
-        res.status(400).send(JSON.stringify({ message: "Заполни все поля" }));
+        res.status(400).send(JSON.stringify({ message: "Заполните все поля" }));
+  } else {
+    next();
+  }
+};
+
+const checkIsGameExists = async (req, res, next) => {
+  const isInArray = req.gamesArray.find((game) => {
+    return req.body.title === game.title;
+  });
+  if (isInArray) {
+    res.setHeader("Content-Type", "application/json");
+        res.status(400).send(JSON.stringify({ message: "Игра с таким названием уже существует" }));
   } else {
     next();
   }
@@ -72,4 +84,5 @@ module.exports = {
   updateGame,
   deleteGame,
   checkEmptyFields,
+  checkIsGameExists
 };
